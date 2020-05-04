@@ -1,0 +1,35 @@
+{
+  "name": "react-kt-desogner-plugin",
+  "version": "1.0.0",
+  "description": "=== Product Designer Plugin ===\r Contributors: Developer36000\r Tags: Woocommerce, Design, Product Customization\r Requires at least: 1.0\r Tested up to: 5.4.1\r Stable tag: woocommerce\r Author URI: https://github.com/developer36000/kt_product_designer_plugin\r License: GPLv2 or later\r License URI: http://www.gnu.org/licenses/gpl-2.0.html",
+  "main": "src/index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@wordpress/scripts": "^9.0.0"
+  },
+  "scripts": {
+    "build": "wp-scripts build",
+    "check-engines": "wp-scripts check-engines",
+    "check-licenses": "wp-scripts check-licenses",
+    "lint:css": "wp-scripts lint-style",
+    "lint:js": "wp-scripts lint-js",
+    "lint:pkg-json": "wp-scripts lint-pkg-json",
+    "start": "wp-scripts start",
+    "test:e2e": "wp-scripts test-e2e",
+    "test:unit": "wp-scripts test-unit-js",
+    "test2": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/developer36000/kt_product_designer_plugin.git"
+  },
+  "keywords": [
+    "woocommerce"
+  ],
+  "author": "developer36000",
+  "license": "1 GNU V2+, MIT",
+  "bugs": {
+    "url": "https://github.com/developer36000/kt_product_designer_plugin/issues"
+  },
+  "homepage": "https://github.com/developer36000/kt_product_designer_plugin#readme"
+}

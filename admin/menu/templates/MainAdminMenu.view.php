@@ -7,6 +7,9 @@
      <ul class="features">
           <li>Test 01</li>
      </ul>
+	
+	<div id="react-app"></div><!-- #react-app -->
+	
 </div>
 <?php
 

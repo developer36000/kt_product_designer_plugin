@@ -31,6 +31,17 @@ class KTDesignerLoaderScript {
 			kt_plugin_version,
 			true
 		);
+		
+		// React SCRIPT
+		wp_register_script(
+			kt_plugin_slug.'-build-js', //$handle
+			kt_plugin_url.'build/index.js',
+			['wp-element'],
+			kt_plugin_version,
+			true
+		);
+		wp_enqueue_script(kt_plugin_slug.'-build-js');
+		
 		/**
 		 * Adds a script only if it has not been added yet and other scripts on which it depends are registered.
 		 * Dependent scripts are added automatically.
@@ -62,25 +73,25 @@ class KTDesignerLoaderScript {
 		
 		
 	}
-	public function loadScriptFront($hook){
-		// SCRIPT
+	public function loadScriptFront($hook) {
+		
+		// React SCRIPT
 		wp_register_script(
-			kt_plugin_slug.'-front-js', //$handle
-			kt_plugin_url.'assets/frontend/js/mapi-front.js',
-			array(
-				'jquery'
-			),
+			kt_plugin_slug.'-front-build-js', //$handle
+			kt_plugin_url.'build/index.js',
+			['wp-element'],
 			kt_plugin_version,
 			true
 		);
-		//wp_enqueue_script(kt_plugin_slug.'-front-js');
-		
+		//wp_enqueue_script(kt_plugin_slug.'-build-js');
+	
+	/*
 		$ajaxsome = array( 'ajaxurl' => kt_plugin_ajax_url);
 		wp_localize_script(
 			kt_plugin_slug.'-front-js', //$handle,
 			kt_plugin_slug.'_ajax',
 			$ajaxsome
-		);
+		);*/
 		
 		// STYLE
 		wp_register_style(
