@@ -1,0 +1,45 @@
+$purpl: #58448B;
+$l-purpl: #A5A3B8;
+$d-purpl: #38355B;
+$d1-purpl: #2C2B57;
+$d2-purpl: #171742;
+$d3-purpl: #181743;
+$carrot: #FF7071;
+$orange: #FF643F;  // #FF643F
+$d-orange: #EA4F2A;  // #FF643F
+$help: #E430E8;
+$l-gray: #EBEBF2;
+$l-pink: #FEEBEB;
+$sky: #A1EDFF;
+$green: #3adb76;
+
+#adminmenu {
+	li#toplevel_page_kt-product-designer-plugin {
+		.wp-menu-image {
+			img {
+				max-width: 24px;
+			}
+		}
+	}
+	
+}
+#kt_designer-plugin {
+	* {
+		font-size: 16px;
+		line-height: 1.4;
+		color: $purpl;
+	}
+	h1 {
+		font-size: 32px;
+		line-height: 1.4;
+		margin-bottom: 32px;
+		font-weight: bolder;
+		color: $d-purpl;
+	}
+	h2, h3, h4, h5, h6 {
+		color: $purpl;
+	}
+	p {
+		margin-bottom: 16px;
+	}
+}

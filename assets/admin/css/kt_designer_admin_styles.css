@@ -1,0 +1,19 @@
+#adminmenu li#toplevel_page_kt-product-designer-plugin .wp-menu-image img {
+  max-width: 24px; }
+
+#kt_designer-plugin * {
+  font-size: 16px;
+  line-height: 1.4;
+  color: #58448B; }
+#kt_designer-plugin h1 {
+  font-size: 32px;
+  line-height: 1.4;
+  margin-bottom: 32px;
+  font-weight: bolder;
+  color: #38355B; }
+#kt_designer-plugin h2, #kt_designer-plugin h3, #kt_designer-plugin h4, #kt_designer-plugin h5, #kt_designer-plugin h6 {
+  color: #58448B; }
+#kt_designer-plugin p {
+  margin-bottom: 16px; }
+
+/*# sourceMappingURL=kt_designer_admin_styles.css.map */
