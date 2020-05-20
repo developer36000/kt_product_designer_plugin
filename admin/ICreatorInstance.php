@@ -1,5 +1,5 @@
 <?php
-namespace admin\menu;
+namespace admin;
 
 
 interface ICreatorInstance

@@ -10,6 +10,9 @@ namespace includes\common;
 
 // custom  menu
 use admin\menu\MainAdminMenuController;
+// Custom Product Row Action
+use admin\product\KTAdminProductMetaModel;
+use admin\product\KTAdminProductActionsModel;
 
 
 
@@ -35,6 +38,9 @@ class KTDesignerLoader {
 	public function admin(){
 		// main plugin page
 		MainAdminMenuController::newInstance();
+		// Custom Product Settings
+		KTAdminProductMetaModel::newInstance();
+		KTAdminProductActionsModel::newInstance();
 		
 	}
 	

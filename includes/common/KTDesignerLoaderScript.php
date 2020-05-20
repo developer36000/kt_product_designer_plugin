@@ -40,12 +40,20 @@ class KTDesignerLoaderScript {
 			kt_plugin_version,
 			true
 		);
-		wp_enqueue_script(kt_plugin_slug.'-build-js');
 		
 		/**
 		 * Adds a script only if it has not been added yet and other scripts on which it depends are registered.
 		 * Dependent scripts are added automatically.
 		 */
+		wp_enqueue_script( kt_plugin_slug.'-admins-js' );
+		//wp_enqueue_script( kt_plugin_slug.'-build-js' );
+		
+		$kt_jp = array(
+			'kt_admin_nonce' => wp_create_nonce( 'kt_admin_nonce' ),
+			'ajaxURL' => admin_url( 'admin-ajax.php' ),
+		);
+		wp_localize_script( kt_plugin_slug.'-admins-js', 'KT_Designer_APIAjaxUrl', $kt_jp );
+		
 		
 		// STYLE
 		wp_register_style(
@@ -55,20 +63,11 @@ class KTDesignerLoaderScript {
 			kt_plugin_version,
 			'all' //(all|screen|handheld|print)
 		);
-		
-		
-		wp_enqueue_style(kt_plugin_slug.'-admin');
-		//wp_enqueue_script(kt_plugin_slug.'-admins-js');
+		wp_enqueue_style( kt_plugin_slug.'-admin' );
 	}
 	
 	
-	public function loadHeadScriptBack(){ ?>
-		
-		<script type="text/javascript">
-			var KT_Designer_APIAjaxUrl;
-			KT_Designer_APIAjaxUrl  = '<?php echo kt_plugin_ajax_url; ?>';
-		</script>
-		<?php
+	public function loadHeadScriptBack(){
 		// Enter script here
 		
 		

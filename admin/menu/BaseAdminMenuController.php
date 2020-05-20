@@ -6,6 +6,9 @@
  * */
 namespace admin\menu;
 
+
+use admin\ICreatorInstance;
+
 abstract class BaseAdminMenuController implements ICreatorInstance {
 	public function __construct(){
 		/*
