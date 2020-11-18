@@ -42,7 +42,7 @@ class KTAdminProductMetaModel extends BaseAdminProductController {
 	 * Save the custom product Fields
 	 * @param $post_id
 	 */
-	public function ktwc_general_save_fields( $post_id, $post ){
+	public function ktwc_general_save_fields( $post_id, $post ) {
 		$product = wc_get_product( $post_id );
 		
 		$label_amazon = isset( $_POST['super_product'] ) ? $_POST['super_product'] : '';
@@ -52,7 +52,8 @@ class KTAdminProductMetaModel extends BaseAdminProductController {
 		
 	}
 	
+	
+
+	
 	use NewInstance;
-	
-	
 }

@@ -16,4 +16,31 @@
 #kt_designer-plugin p {
   margin-bottom: 16px; }
 
+#edittag {
+  max-width: 100% !important; }
+
+.custom_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: max-content;
+  width: 100%;
+  margin: 10px;
+  padding: 10px 15px;
+  min-height: 40px;
+  min-width: 120px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  color: #58448B;
+  border: 1px solid #58448B;
+  box-sizing: border-box;
+  border-radius: 100px;
+  transition: all .3s;
+  text-decoration: none; }
+  .custom_btn:hover, .custom_btn:focus {
+    background: #58448B;
+    color: #fff; }
+
 /*# sourceMappingURL=kt_designer_admin_styles.css.map */

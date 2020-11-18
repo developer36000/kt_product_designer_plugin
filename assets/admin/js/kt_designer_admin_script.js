@@ -1,13 +1,123 @@
+
 (function ($) {
 	"use_strict";
 	
+	var _window = $(window),
+		_doc = $(document);
 	
-	$(document).ready(function () {
+	
+	let addImageToCanvas = (canvas, imgSrc) => {
+		let canvas_dataset = canvas.lowerCanvasEl.dataset,
+			print_w = canvas_dataset.print_width,
+			print_h = canvas_dataset.print_height,
+			rect_obj_str = canvas_dataset.r_acoords;
+		
+		fabric.Object.prototype.transparentCorners = false;
+		fabric.Image.fromURL(imgSrc, function(myImg) {
+			
+			myImg.scaleToWidth(canvas.width);
+			myImg.scaleToHeight(canvas.height);
+			//oImg.scale(0.5).set('flipX', false);
+			myImg.selectable = false;
+			canvas.add(myImg);
+			
+		});
+	};
+	
+	
+	_doc.ready(function () {
+		
+		
+		if ( _doc.find('#c_product_canvas_admin').length > 0 ) {
+			let c_canvas_obj = _doc.find('#c_product_canvas_admin'),
+				c_main_wrap = c_canvas_obj.parents('.main-canvas-wrap'),
+				containerWidth = c_main_wrap.width(),
+				containerHeight = c_main_wrap.height(),
+				c_canvas_data = c_canvas_obj.get(0).dataset,
+				c_bg_image_url = c_canvas_data.default_img,
+				canvas_w = c_canvas_data.print_width,
+				canvas_h = c_canvas_data.print_height,
+				canvas_aCoords_str = c_canvas_data.r_acoords;
+		
+			var c_canvas_admin = new fabric.Canvas("c_product_canvas_admin");
+			console.log({c_canvas_obj});
+			//change default settings
+			fabric.Canvas.prototype.freeDrawingCursor = "none";
+			fabric.Canvas.prototype.rotationCursor = "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+gvaeTAAACdElEQVQ4jZ2UTUiUURSGn/N9U4yZpYK5kMhE3BQUblq4ER0zEV2k4lgEbvqxHzc59rNy588MTIQmuGkhosNoQUKTk0qblmZBCZlhIBRWRPnTmM58p4VOmI2m864u95z73Pflcq6wpprCO+lJ3xO+dY1dXGGdyvNakxITzQwAGzrTHXQtsoVs0YXKysR8SrgLuFXlaNlvYruGaiXCMbUUgBXA6XCPI9pv2uztPYH6uY1AiS6cDreCdgkyotAJpAq8tZCgwDSAwmFBi4Ec4CsqdX0jDf1bAWdBDgBTolrfO9L4JFas6gJPiWGoVyEHtLFvuNETrRkbDKcDKsIYIgW1+U32WEDfaEMgTOQE6ChIW42jrWIT4OqeKk4Lzi/tSkiNBQTwD9/8EcGqEJhU5N7Zkrv7/oocr6oLPCVi6GNRbveOuJpjOdyRfKMNAWBShSqIHTkeBYHj5066E21nSptTrGXTp4bp8g1dfxUPTUQ+qKosR4wMI7K0Ow2VIsJWYbz2VC0BsGxiGVbE/nHtmsx4gSCHALVr5JPhf3ZlQeHl2gTEq1PAeHfQtWismlM/kFNd4CnZKcnpcJcC2Yr6Ye2VTZu9HfhiGOqtcrTs3y6sNt+bDHhBZ0Mh7fgD7AnUz6FyWSHHxBjYDrQ235v8yxZ5AGQjUvfo+Y15ADPa8Ho6OHE0q2gR5IKJcfpIZvH7N9PBqc1ihg1rAMhVpcE37Lofrf0zejWOtgpFOoE04B0wpLr6fQmShWgxkA18RrjU99T1cP35mLNcntealGg3rqpQCeRuKL9Q1B8KaUc05n+B61VW1rTHvpBwEGBpb2hmcLDp51b9vwHv/uvmHUIE9QAAAABJRU5ErkJggg==) 12 12, auto";
+			fabric.Object.prototype.set({
+				hasRotatingPoint: true,
+				rotatingPointOffset: 20,
+				borderDashArray: [6, 6],
+				borderColor: '#38355B',
+				cornerColor: '#38355B',
+				cornerSize: 8,
+				transparentCorners: true,
+				cornerStyle: 'rect', // circle
+			});
+	
+			addImageToCanvas(c_canvas_admin, c_bg_image_url);
+			
+			var scaleRatio = Math.min(containerWidth/c_canvas_admin.width, containerHeight/c_canvas_admin.height);
+			console.log({scaleRatio});
+			c_canvas_admin.setDimensions({
+				width: c_canvas_admin.getWidth() * scaleRatio,
+				height: c_canvas_admin.getHeight() * scaleRatio }
+			);
+			//c_canvas_admin.setZoom(scaleRatio);
+		
+		    let r_aCoords = $.parseJSON( canvas_aCoords_str ),
+			    r_default_data = {
+					aCoords : r_aCoords,
+					left: 10,
+					top: 10,
+					fill: 'rgba(88, 68, 139, 0.6)',
+					width: 100,
+					height: canvas_h
+				};
+			
+			if ( r_aCoords ) {
+				r_aCoords.cacheHeight = canvas_h;
+			}
+			let r_main_data = r_aCoords ? r_aCoords : r_default_data;
+			
+			// create a rectangle object
+			var c_rect = new fabric.Rect( r_main_data );
+			
+			// "add" rectangle onto canvas
+			c_canvas_admin.add(c_rect);
+			c_canvas_admin.setActiveObject(c_rect);
+	
+			c_canvas_admin.requestRenderAll();
+			//console.log(JSON.stringify(c_canvas_admin));
+			
+			c_canvas_admin.on('after:render', function (e) {
+				console.log('c_canvas - after:render');
+				let active = c_canvas_admin.getActiveObject(),
+					a_str = JSON.stringify(active);
+				console.log(active);
+				
+				Cookies.set('canvas_active_object', a_str, { expires : 3 });
+				
+				if ( active ) {
+					_doc.find('[name="_rect_obg_coord_real"]').val(Cookies.get('canvas_active_object'));
+					_doc.find('[name="_scaleRatio_coord_real"]').val(scaleRatio);
+				}
+				
+			});
+			
+		}
+		
+		
+		_doc.find('#print-custom-img').on('click', function (e) {
+			e.preventDefault();
+			printJS($(this).attr('href'), 'image')
+		});
+
 		
 		/**
-		* Custom Product Row Action
-		* */
-		$(document).find('.make_as_default_action').click(function (e) {
+		 * Custom Product Row Action
+		 * */
+		$(document).find('.make_as_default_action').on('click',function (e) {
 			e.preventDefault();
 			let _this = $(this),
 				parent = _this.parents('tr'),
@@ -28,24 +138,40 @@
 			
 			$.ajax({
 				type: 'POST',
-				dataType: 'json',
 				url: KT_Designer_APIAjaxUrl.ajaxURL,
 				data: {
 					action: "make_as_default_product",
 					product_id: post_id
 				},
-				success: function (response) {
-					if ( !response ) {
-						_this.text('Unmark as Default');
-						parent.append(remove_action_hide);
-						default_column.html(mark_icon);
+				dataType: "json",
+				success: function ( response ) {
+					console.log(response);
+					let is_super = response.is_super,
+						has_cat_default = response.has_cat_default,
+						product_cat_obj = response.product_cat_obj;
+					
+					if ( has_cat_default === false ) {
+						if ( !is_super ) {
+							_this.text('Unmark as Default');
+							parent.append(remove_action_hide);
+							default_column.html(mark_icon);
+						} else {
+							_this.text('Mark as Default');
+							parent.append(remove_action_show);
+							default_column.html(unmark_icon);
+						}
+						parent.parents('.wrap').find('#ktwc-notice').fadeOut().remove();
 					} else {
-						_this.text('Mark as Default');
-						parent.append(remove_action_show);
-						default_column.html(unmark_icon);
+						parent.parents('.wrap').find('#ktwc-notice').fadeOut().remove();
+						parent.parents('.wrap').find('.wp-header-end')
+							.after('<div id="ktwc-notice" class="notice notice-error is-dismissible">' +
+								'<h4>Each category can have only one default product.</h4></div>');
 					}
+					
+					
 				},
 			});
+			
 		});
 		// end ->> Custom Product Row Action
 		
@@ -53,5 +179,3 @@
 	});
 	
 })(jQuery);
-
-

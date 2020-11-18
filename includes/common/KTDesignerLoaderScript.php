@@ -23,15 +23,37 @@ class KTDesignerLoaderScript {
 	public function loadScriptBack($hook){
 		// SCRIPT
 		wp_register_script(
-			kt_plugin_slug.'-admins-js', //$handle
-			kt_plugin_url.'assets/admin/js/kt_designer_admin_script.js',
+			kt_plugin_slug.'-fabric-js', //$handle
+			kt_plugin_url.'assets/admin/js/lib/fabric.min.js',
 			array(
-				'jquery'
+				'jquery',
+				'inline-edit-post'
 			),
 			kt_plugin_version,
 			true
 		);
-		
+		wp_register_script(
+			kt_plugin_slug.'-printjs-js', //$handle
+			'https://printjs-4de6.kxcdn.com/print.min.js',
+			array(
+				'jquery',
+				'inline-edit-post'
+			),
+			'1.0.61',
+			true
+		);
+		wp_register_script(
+			kt_plugin_slug.'-admins-js', //$handle
+			kt_plugin_url.'assets/admin/js/kt_designer_admin_script.js',
+			array(
+				'jquery',
+				kt_plugin_slug.'-fabric-js',
+				kt_plugin_slug.'-printjs-js',
+				'inline-edit-post'
+			),
+			kt_plugin_version,
+			true
+		);
 		// React SCRIPT
 		wp_register_script(
 			kt_plugin_slug.'-build-js', //$handle
@@ -45,6 +67,8 @@ class KTDesignerLoaderScript {
 		 * Adds a script only if it has not been added yet and other scripts on which it depends are registered.
 		 * Dependent scripts are added automatically.
 		 */
+		wp_enqueue_script( kt_plugin_slug.'-fabric-js' );
+		wp_enqueue_script( kt_plugin_slug.'-printjs-js' );
 		wp_enqueue_script( kt_plugin_slug.'-admins-js' );
 		//wp_enqueue_script( kt_plugin_slug.'-build-js' );
 		
@@ -57,12 +81,21 @@ class KTDesignerLoaderScript {
 		
 		// STYLE
 		wp_register_style(
+			kt_plugin_slug.'-printjs-css', //$handle
+			'https://printjs-4de6.kxcdn.com/print.min.css',
+			array(),
+			'1.0.61',
+			'all' //(all|screen|handheld|print)
+		);
+		wp_register_style(
 			kt_plugin_slug.'-admin', //$handle
 			kt_plugin_url.'assets/admin/css/kt_designer_admin_styles.css',
 			array(),
 			kt_plugin_version,
 			'all' //(all|screen|handheld|print)
 		);
+	
+		wp_enqueue_style( kt_plugin_slug.'-printjs-css' );
 		wp_enqueue_style( kt_plugin_slug.'-admin' );
 	}
 	

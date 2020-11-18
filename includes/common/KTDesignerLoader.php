@@ -13,7 +13,8 @@ use admin\menu\MainAdminMenuController;
 // Custom Product Row Action
 use admin\product\KTAdminProductMetaModel;
 use admin\product\KTAdminProductActionsModel;
-
+// Product Customize Area
+use admin\product\KTAdminProductCustomizeArea;
 
 
 class KTDesignerLoader {
@@ -37,10 +38,12 @@ class KTDesignerLoader {
 	 */
 	public function admin(){
 		// main plugin page
-		MainAdminMenuController::newInstance();
+		//MainAdminMenuController::newInstance();
 		// Custom Product Settings
 		KTAdminProductMetaModel::newInstance();
 		KTAdminProductActionsModel::newInstance();
+		// Product Customize Area
+		KTAdminProductCustomizeArea::NewInstance();
 		
 	}
 	
